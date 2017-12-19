@@ -160,19 +160,35 @@ const progressBar = document.getElementById('progress');
 const previousButton = document.getElementById('previous');
 const nextButton = document.getElementById('next');
 const slides = document.querySelectorAll('.slide');
-const buttonslides = [];
+const buttonslides = document.querySelectorAll('.navbutton');
 let currentSlide = 0;
 let resultsShown = false;
 
 showSlide(0);
 progressBarUpdate();
 
-reviewButton.addEventListener('click', function() {if(!resultsShown){review(); reviewButton.innerHTML="Hide Review"; }else{reviewButton.innerHTML="Review Your Answers", reviewContainer.innerHTML = ""; clearInterval()}; resultsShown = !resultsShown; console.log(resultsShown)} );
+reviewButton.addEventListener('click', function() {
+  if(!resultsShown){
+    review();
+    reviewButton.innerHTML="Hide Review";
+  }else{
+    reviewButton.innerHTML="Review Your Answers";
+    reviewContainer.innerHTML = "";
+    clearInterval();
+  };
+  resultsShown = !resultsShown;
+  console.log(resultsShown)}
+);
 submitButton.addEventListener('click', function() {showResults()} );
 previousButton.addEventListener('click', function() {showPreviousSlide()} );
 nextButton.addEventListener('click', function() {showNextSlide()} );
 
+
 for(var i=0; i<myQuestions.length; i++){
-  buttonslides.push(document.getElementById("buttonslide"+((i+1).toString())));
-  buttonslides[i].addEventListener('click', function(){showSlide(parseInt(buttonslides[i].value)-1);console.log("Slide: " + (parseInt(buttonslides[i].value)-1).toString())});
+  console.log(buttonslides[i].value);
+}
+for(var i=0; i<myQuestions.length; i++){
+  buttonslides[i].addEventListener('click', function(){
+    showSlide(parseInt(this.value)-1);
+  });
 }
